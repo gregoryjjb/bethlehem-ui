@@ -41,11 +41,11 @@ const styles = theme => ({
 const Header = ({ classes, status }) => (
     <AppBar position="static" color='primary' >
         <Toolbar className={classes.root} >
-            <Hidden xsDown>
-                <div className={classes.title} >
-                    <Typography variant="h6" color="inherit">Bethlehem</Typography>
-                </div>
-            </Hidden>
+            <div className={classes.title} >
+                <Hidden xsDown implementation='css' >
+                        <Typography variant="h6" color="inherit">Bethlehem</Typography>
+                </Hidden>
+            </div>
             <PlaybackControlsContainer className={classes.controls} />
             <div className={classes.playing} >
                 <Typography

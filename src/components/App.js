@@ -7,15 +7,17 @@ import ShowListContainer from '../containers/ShowListContainer';
 import HeaderContainer from '../containers/HeaderContainer';
 import PageContents from './PageContents';
 import SocketHandler from '../utils/SocketHandler';
+import AppLayout from './AppLayout';
 
 const App = ({ }) => (
     <Store.Container>
         <CssBaseline />
         <SocketHandler />
-        <HeaderContainer />
-        <PageContents narrow>
-            <ShowListContainer />
-        </PageContents>
+        <AppLayout>
+            <PageContents narrow>
+                <ShowListContainer />
+            </PageContents>
+        </AppLayout>
     </Store.Container>
 )
 
