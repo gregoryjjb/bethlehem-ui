@@ -1,4 +1,5 @@
 import React from 'react';
+import Store from '../utils/store';
 import Header from '../components/Header';
 
 class HeaderContainer extends React.Component {
@@ -30,12 +31,18 @@ class HeaderContainer extends React.Component {
     }
     
     render() {
+        const status = this.props.store.get('player.status')
+        
+        if(this.headerRef && this.headerRef.clientHeight !== this.state.height) {
+            this.updateHeight();
+        }
+        
         return (
             <React.Fragment>
                 <div
                     ref={r => this.headerRef = r}
                     style={{ position: 'fixed', width: '100%', zIndex: 1000 }} >
-                    <Header  />
+                    <Header status={status} />
                 </div>
                 <div style={{ height: this.state.height }} ></div>
             </React.Fragment>
@@ -43,4 +50,4 @@ class HeaderContainer extends React.Component {
     }
 }
 
-export default HeaderContainer;
+export default Store.withStore(HeaderContainer);

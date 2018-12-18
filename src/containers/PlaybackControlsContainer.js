@@ -6,15 +6,15 @@ class PlaybackControlsContainer extends React.Component {
     
     playAll = () => {
         console.log("What")
-        fetch('/play/all');
+        fetch('api/play/all');
     }
     
     stop = () => {
-        fetch('/play/stop');
+        fetch('api/play/stop');
     }
     
     skip = () => {
-        fetch('/play/skip');
+        fetch('api/play/skip');
     }
     
     render() {

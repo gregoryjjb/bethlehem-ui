@@ -6,7 +6,7 @@ import ShowList from '../components/ShowList';
 class ShowListContainer extends React.Component {
     
     componentDidMount() {
-        fetch('/shows')
+        fetch('api/shows')
             .then(res => res.json())
             .then(res => {
                 console.log(res);
@@ -16,7 +16,7 @@ class ShowListContainer extends React.Component {
     
     playShow = name => {
         if(this.props.store.get('shows').find(s => s.name === name).hasAudio) {
-            fetch('/play/single/' + name);
+            fetch('api/play/single/' + name);
         }
         else {
             console.log("WHOOPS NO AUDIO")

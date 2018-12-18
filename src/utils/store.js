@@ -3,6 +3,10 @@ import  { createConnectedStore } from 'undux';
 const initialState = {
     shows: [],
     selectedShow: '',
+    'player.status': '...',
 }
 
-export default createConnectedStore(initialState);
+const Store = createConnectedStore(initialState);
+
+export default Store;
+

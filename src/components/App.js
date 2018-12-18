@@ -6,10 +6,12 @@ import ShowListContainer from '../containers/ShowListContainer';
 
 import HeaderContainer from '../containers/HeaderContainer';
 import PageContents from './PageContents';
+import SocketHandler from '../utils/SocketHandler';
 
 const App = ({ }) => (
     <Store.Container>
         <CssBaseline />
+        <SocketHandler />
         <HeaderContainer />
         <PageContents narrow>
             <ShowListContainer />
