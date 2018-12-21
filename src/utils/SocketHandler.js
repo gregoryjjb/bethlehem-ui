@@ -14,6 +14,22 @@ class SocketHandler extends React.Component {
             
             store.set('player.status')(newStatus);
         })
+        
+        // Get config
+        fetch('/api/config')
+            .then(res => res.json())
+            .then(res => {
+                [
+                    'gpioPinNumbers',
+                    'useBoardPinNumbering',
+                    'invertPinOutput',
+                    'gpioLogging',
+                    'interShowDelay'
+                ].forEach(key => {
+                    store.set(`config.${key}`)(res[key]);
+                });
+                store.set('ready')(true);
+            })
     }
     
     render() {

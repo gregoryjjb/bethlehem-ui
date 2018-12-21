@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 
 import Store from '../utils/store';
-import ShowListContainer from '../containers/ShowListContainer';
 
-import HeaderContainer from '../containers/HeaderContainer';
-import PageContents from './PageContents';
 import SocketHandler from '../utils/SocketHandler';
 import AppLayout from './AppLayout';
 
-const App = ({ }) => (
-    <Store.Container>
-        <CssBaseline />
-        <SocketHandler />
-        <AppLayout>
-            <PageContents narrow>
-                <ShowListContainer />
-            </PageContents>
-        </AppLayout>
-    </Store.Container>
+import ShowPage from '../pages/ShowPage';
+import SettingsPage from '../containers/SettingsPage';
+import LoadingPage from '../pages/LoadingPage';
+
+const App = ({ store }) => (
+        <>
+            <CssBaseline />
+            <SocketHandler />
+            {store.get('ready') ? (
+                <AppLayout>
+                    <Switch>
+                        <Route path='/' exact component={ShowPage} />
+                        <Route path='/settings' component={SettingsPage} />
+                    </Switch>
+                </AppLayout>
+            ) : (
+                <LoadingPage />
+            )}
+        </>
 )
 
-export default App;
+export default Store.withStore(App);

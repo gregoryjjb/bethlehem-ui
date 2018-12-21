@@ -32,7 +32,7 @@ const ShowList = ({ classes, shows = [], playlists = [], showClicked, setSelecte
     <React.Fragment>
         <Card className={classes.root} >
             <CardContent>
-                <Typography variant='h5' gutterBottom>Shows</Typography>
+                <Typography variant='h5' gutterBottom>Songs</Typography>
                 <Divider/>
                 <ClickableList
                     items={shows.map(show => ({

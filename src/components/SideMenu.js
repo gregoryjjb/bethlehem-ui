@@ -1,11 +1,14 @@
 import React from 'react';
 
 import {
-    withStyles, List, ListItem, ListItemText, Hidden, Drawer, SwipeableDrawer, Fab, Toolbar, Typography, Divider,
+    withStyles, List, ListItem, ListItemText, Hidden, Drawer, SwipeableDrawer, Fab, Toolbar, Typography, Divider, ListItemIcon,
 } from '@material-ui/core';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
+import HomeIcon from '@material-ui/icons/Home';
+import SettingsIcon from '@material-ui/icons/Settings';
+import UnstyledLink from './UnstyledLink';
 
 const drawerWidth = 280;
 
@@ -40,12 +43,29 @@ const styles = theme => ({
     }
 });
 
+const links = [{
+    name: 'Show',
+    to: '/',
+    icon: <HomeIcon />,
+}, {
+    name: 'Settings',
+    to: '/settings',
+    icon: <SettingsIcon />
+}]
+
 const DrawerContent = ({ closeClicked, classes }) => (
     <div className={classes.drawerContent}>
         <List>
-            <ListItem>
-                <ListItemText primary="Placeholder" />
-            </ListItem>
+            {links.map(l => (
+                <UnstyledLink to={l.to} key={l.name}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            {l.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={l.name} />
+                    </ListItem>
+                </UnstyledLink>
+            ))}
         </List>
     </div>
 )
