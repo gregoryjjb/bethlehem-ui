@@ -1,13 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Input from "./Input";
-import { withStyles, Button, Grid, Divider } from "@material-ui/core";
+import { withStyles, Button, Grid, Divider, CircularProgress } from "@material-ui/core";
 
 const styles = theme => ({
     grid: {
         marginTop: 16,
         marginBottom: 16,
     },
+    buttonWrapper: {
+        position: 'relative',
+    },
+    applyButton: {
+        position: 'relative',
+    },
+    buttonProgress: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    }
 });
 
 class Form extends React.Component {
@@ -133,6 +146,9 @@ class Form extends React.Component {
             fields,
             requiredAsterisk,
             submitText,
+            divider,
+            disabled,
+            fetching,
         } = this.props;
 
         return (
@@ -152,13 +168,13 @@ class Form extends React.Component {
                                 field={field}
                                 value={this.state.values[field.name]}
                                 valid={this.state.validationResults[field.name]}
-                                disabled={this.props.disabled}
+                                disabled={disabled}
                                 requiredAsterisk={requiredAsterisk}
                                 onChange={this.handleFieldChange}
                                 onBlur={this.handleFieldBlur}
                                 key={field.name}
                             />
-                            {key !== fields.length - 1 && <Divider />}
+                            {divider && key !== fields.length - 1 && <Divider />}
                         </>
                         /*</Grid>*/
                     ))}
@@ -167,10 +183,11 @@ class Form extends React.Component {
                     variant="outlined"
                     color="primary"
                     size="large"
-                    disabled={this.props.disabled}
+                    disabled={disabled || fetching}
                     onClick={this.handleSubmit}
                 >
                     {submitText || 'Submit'}
+                    {fetching && <CircularProgress className={classes.buttonProgress} size={24} />}
                 </Button>
             </form>
         );
@@ -184,15 +201,7 @@ Form.propTypes = {
             label: PropTypes.string.isRequired,
             type: PropTypes.string.isRequired,
             options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any, label: PropTypes.string })),
-            /*PropTypes.arrayOf(
-                PropTypes.shape({
-                    value: PropTypes.oneOfType([
-                        PropTypes.string,
-                        PropTypes.number,
-                    ]),
-                    display: PropTypes.string,
-                })
-            )*/ defaultValue: PropTypes.oneOfType(
+            defaultValue: PropTypes.oneOfType(
                 [PropTypes.string, PropTypes.number, PropTypes.bool]
             ),
             required: PropTypes.bool,
@@ -200,11 +209,15 @@ Form.propTypes = {
         })
     ),
     onSubmit: PropTypes.func,
+    divider: PropTypes.bool,
+    requiredAsterisk: PropTypes.bool,
 };
 
 Form.defaultProps = {
     fields: [],
     style: { display: "flex", flexDirection: "column" },
+    disabled: false,
+    fetching: false,
 };
 
 export default withStyles(styles)(Form);

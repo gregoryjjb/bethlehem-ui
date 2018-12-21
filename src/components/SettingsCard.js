@@ -64,8 +64,9 @@ class SettingsCard extends React.Component {
                             md={12}
                             lg={12}
                             submitText='Apply'
+                            divider
                             onSubmit={onSubmit}
-                            disabled={fetching} />
+                            fetching={fetching} />
                         
                     </div>
                 </CardContent>
