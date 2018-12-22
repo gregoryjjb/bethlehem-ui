@@ -1,4 +1,4 @@
-import  { createConnectedStore, withLogger } from 'undux';
+import  { createStore, createConnectedStore, withLogger, connect } from 'undux';
 
 const initialState = {
     shows: [],
@@ -23,6 +23,13 @@ const initialState = {
     'settings.interShowDelay': 0,
 }
 
-const Store = createConnectedStore(initialState, withLogger);
+const store = withLogger(createStore(initialState));
+
+const Store = {
+    store,
+    get: store.get,
+    set: store.set,
+    withStore: connect(store),
+} //= createConnectedStore(initialState, withLogger);
 
 export default Store;

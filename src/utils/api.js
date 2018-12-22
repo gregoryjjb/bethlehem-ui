@@ -8,4 +8,6 @@ api.getConfig = () => axApi.get('/config');
 
 api.setConfig = config => axApi.put('/config', config);
 
+api.getShows = () => axApi.get('/shows');
+
 export default api;

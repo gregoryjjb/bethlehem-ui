@@ -6,12 +6,12 @@ import ShowList from '../components/ShowList';
 class ShowListContainer extends React.Component {
     
     componentDidMount() {
-        fetch('api/shows')
-            .then(res => res.json())
-            .then(res => {
-                console.log(res);
-                this.props.store.set('shows')(res);
-            })
+        //fetch('api/shows')
+        //    .then(res => res.json())
+        //    .then(res => {
+        //        console.log(res);
+        //        this.props.store.set('shows')(res);
+        //    })
     }
     
     playShow = name => {

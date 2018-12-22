@@ -1,6 +1,7 @@
 import React from 'react';
 import io from 'socket.io-client';
 import Store from './store';
+import api from './api';
 
 class SocketHandler extends React.Component {
     
@@ -29,6 +30,12 @@ class SocketHandler extends React.Component {
                     store.set(`config.${key}`)(res[key]);
                 });
                 store.set('ready')(true);
+            })
+        
+        // Get shows
+        api.getShows()
+            .then(res => {
+                store.set('shows')(res.data);
             })
     }
     

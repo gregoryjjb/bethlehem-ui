@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import PageContents from '../components/PageContents';
 import SettingsCard from '../components/SettingsCard';
-import SettingsContainer from './SettingsContainer';
+import SettingsContainer from '../containers/SettingsContainer';
 
 const styles = theme => ({
     root: {},

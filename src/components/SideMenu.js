@@ -7,7 +7,9 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import HomeIcon from '@material-ui/icons/Home';
+import ViewListIcon from '@material-ui/icons/ViewList';
 import SettingsIcon from '@material-ui/icons/Settings';
+
 import UnstyledLink from './UnstyledLink';
 
 const drawerWidth = 280;
@@ -47,6 +49,10 @@ const links = [{
     name: 'Show',
     to: '/',
     icon: <HomeIcon />,
+}, {
+    name: 'Manage',
+    to: '/manage',
+    icon: <ViewListIcon />
 }, {
     name: 'Settings',
     to: '/settings',

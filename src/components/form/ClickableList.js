@@ -7,6 +7,10 @@ import {
 
 const styles = theme => ({
     root: {},
+    text: {
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+    }
 })
 
 const ClickableList = ({ classes, items = [], onItemClick, icon }) => (
@@ -19,7 +23,7 @@ const ClickableList = ({ classes, items = [], onItemClick, icon }) => (
                 {item.icon && <ListItemIcon>
                     {item.icon}
                 </ListItemIcon>}
-                <ListItemText primary={item.label} />
+                <ListItemText primary={item.label} classes={{ primary: classes.text }} />
             </ListItem>
         ))}
     </List>

@@ -10,11 +10,11 @@ import Store from './utils/store';
 
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
-        <Store.Container>
-            <BrowserRouter>
+        
+            
                 <App />
-            </BrowserRouter>
-        </Store.Container>
+            
+        
     </MuiThemeProvider>,
     document.getElementById('root')
 );

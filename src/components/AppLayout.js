@@ -24,6 +24,7 @@ const styles = theme => ({
     area: {
         flex: '1 1 100%',
         paddingBottom: 80, // Leave space for FAB
+        maxWidth: '100%',
     }
 })
 
