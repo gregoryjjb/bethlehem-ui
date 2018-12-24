@@ -36,9 +36,10 @@ export const fetchConfig = () => {
                 ].forEach(key => {
                     store.set(`config.${key}`)(res.data[key]);
                 });
+                store.set('config.error')('');
             })
             .catch(err => {
-                
+                store.set('config.error')(err.message);
             })
             .then(() => {
                 store.set('config.fetching')(false);

@@ -3,6 +3,7 @@ import React from 'react';
 import {
     withStyles, Typography,
 } from '@material-ui/core';
+import GlobalError from './GlobalError';
 
 const styles = theme => ({
     root: {
@@ -19,6 +20,7 @@ const PageContents = ({ classes, title, narrow = false, children, ...props }) =>
         maxWidth: narrow ? 800 : 1000,
     }} >
         <div className={classes.root} {...props} >
+            <GlobalError />
             {title && <Typography variant='h2' gutterBottom>{title}</Typography>}
             {children}
         </div>

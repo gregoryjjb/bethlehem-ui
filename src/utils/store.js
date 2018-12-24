@@ -9,6 +9,7 @@ const initialState = {
     'player.status': '...',
     
     ready: false,
+    error: '',
     
     // Config
     'config.gpioPinNumbers': null,
