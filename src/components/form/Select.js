@@ -78,4 +78,8 @@ class OutlinedSelect extends React.Component {
     }
 }
 
+OutlinedSelect.defaultProps = {
+    valid: '',
+}
+
 export default OutlinedSelect;

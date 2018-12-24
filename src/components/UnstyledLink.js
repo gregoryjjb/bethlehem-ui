@@ -16,8 +16,8 @@ const styles = theme => ({
     },
 })
 
-const UnstyledLink = ({ classes, children, to = '' }) => (
-    <Link className={classes.root} to={to}>
+const UnstyledLink = ({ classes, className, children, to = '' }) => (
+    <Link className={classes.root + ' ' + className} to={to}>
         {children}
     </Link>
 );

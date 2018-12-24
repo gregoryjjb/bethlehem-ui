@@ -15,7 +15,7 @@ const SelectableList = ({ classes, items = [], selectedItem = '', onItemClick })
             <ListItem
                 button
                 selected={item.value === selectedItem}
-                onClick={() => onItemClick(item.value)} >
+                onClick={() => onItemClick && onItemClick(item.value)} >
                 <ListItemText primary={item.label} />
             </ListItem>
         ))}

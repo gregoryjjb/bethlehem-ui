@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core';
 
-export default createMuiTheme({
+const theme = {
     typography: {
         useNextVariants: true,
     },
@@ -12,4 +12,11 @@ export default createMuiTheme({
             main: '#81c784',
         }
     }
-});
+}
+
+export default createMuiTheme(theme);
+
+const etheme = JSON.parse(JSON.stringify(theme));
+etheme.palette.type = 'dark';
+
+export const editorTheme = createMuiTheme(etheme);

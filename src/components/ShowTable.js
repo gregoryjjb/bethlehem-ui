@@ -39,6 +39,7 @@ const ShowTable = ({ classes, shows = [], editClicked, addClicked }) => (
                 <TableHead>
                     <TableRow>
                         <TableCell>Name</TableCell>
+                        <TableCell align='right'>Include in Rotation</TableCell>
                         <TableCell align='right'>Audio</TableCell>
                         <TableCell align='right'>Source</TableCell>
                         <TableCell align='right'>Edit</TableCell>
@@ -48,10 +49,11 @@ const ShowTable = ({ classes, shows = [], editClicked, addClicked }) => (
                     {shows.map(show => (
                         <TableRow key={show.name}>
                             <TableCell>{show.displayName}</TableCell>
+                            {boolToCell(show.playInAll)}
                             {boolToCell(show.hasAudio)}
                             {boolToCell(show.hasSource)}
                             <TableCell padding='checkbox' align='right' >
-                                <IconButton onClick={() => editClicked && editClicked(show.id)}>
+                                <IconButton onClick={() => editClicked && editClicked(show)}>
                                     <EditIcon fontSize='small' />
                                 </IconButton>
                             </TableCell>

@@ -10,4 +10,6 @@ api.setConfig = config => axApi.put('/config', config);
 
 api.getShows = () => axApi.get('/shows');
 
+api.editShow = show => axApi.put(`shows/${show.name}`, show);
+
 export default api;

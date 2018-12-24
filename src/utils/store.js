@@ -2,6 +2,9 @@ import  { createStore, createConnectedStore, withLogger, connect } from 'undux';
 
 const initialState = {
     shows: [],
+    'shows.fetching': false,
+    'shows.error': '',
+    
     selectedShow: '',
     'player.status': '...',
     
@@ -13,22 +16,25 @@ const initialState = {
     'config.useBoardPinNumbering': false,
     'config.gpioLogging': true,
     'config.interShowDelay': 0,
-    // Not a real config option
+    // Not real config options
     'config.fetching': false,
+    'config.error': '',
     
-    // Settings are what is shown in the settings page
-    'settings.gpioPinNumbers': null,
-    'settings.invertPinOutput': false,
-    'settings.gpioLogging': true,
-    'settings.interShowDelay': 0,
+    // Show edit dialog
+    'editShowDialog.show': null,
+    'editShowDialog.open': false,
+    'editShowDialog.fetching': false,
+    
+    'editor.playing': false,
+    'editor.show': null,
 }
 
 const store = withLogger(createStore(initialState));
 
 const Store = {
-    store,
-    get: store.get,
-    set: store.set,
+    instance: store,
+    get: key => store.get(key),
+    set: key => value => store.set(key)(value),
     withStore: connect(store),
 } //= createConnectedStore(initialState, withLogger);
 

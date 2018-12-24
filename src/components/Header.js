@@ -6,9 +6,13 @@ import {
     Toolbar, 
     Typography,
     Hidden,
+    IconButton,
 } from '@material-ui/core';
 
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 import PlaybackControlsContainer from '../containers/PlaybackControlsContainer';
+import UnstyledLink from './UnstyledLink';
 
 const styles = theme => ({
     '@keyframes marquee': {
@@ -19,6 +23,17 @@ const styles = theme => ({
         [theme.breakpoints.down('xs')]: {
             flexDirection: 'column',
         }
+    },
+    editorBar: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    backButton: {
+        marginRight: 16,
+    },
+    editorTitle: {
+        display: 'flex',
+        alignItems: 'center',
     },
     title: {
         flex: 1,
@@ -38,24 +53,37 @@ const styles = theme => ({
     }
 })
 
-const Header = ({ classes, status }) => (
+const Header = ({ classes, status, editor = false }) => (
     <AppBar position="static" color='primary' >
-        <Toolbar className={classes.root} >
-            <div className={classes.title} >
-                <Hidden xsDown implementation='css' >
-                        <Typography variant="h6" color="inherit">Bethlehem</Typography>
-                </Hidden>
-            </div>
-            <PlaybackControlsContainer className={classes.controls} />
-            <div className={classes.playing} >
-                <Typography
-                    variant="h6"
-                    color="inherit"
-                    className={classes.slide} >
-                    {status}
-                </Typography>
-            </div>
-        </Toolbar>
+        {editor ? (
+            <Toolbar className={classes.editorBar}>
+                <UnstyledLink to='/' className={classes.editorTitle}>
+                    <IconButton color='inherit' className={classes.backButton}>
+                        <ArrowBackIcon />
+                    </IconButton>
+                    <Typography variant='h6' color='inherit'>Bethlehem Editor</Typography>
+                </UnstyledLink>
+            </Toolbar>
+        ) : (
+            <Toolbar className={classes.root} >
+                <div className={classes.title} >
+                    <Hidden xsDown implementation='css' >
+                        <Typography variant="h6" color="inherit">
+                            Bethlehem
+                        </Typography>
+                    </Hidden>
+                </div>
+                <PlaybackControlsContainer className={classes.controls} />
+                <div className={classes.playing} >
+                    <Typography
+                        variant="h6"
+                        color="inherit"
+                        className={classes.slide} >
+                        {status}
+                    </Typography>
+                </div>
+            </Toolbar>
+        )}
     </AppBar>
 );
 

@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import HomeIcon from '@material-ui/icons/Home';
 import ViewListIcon from '@material-ui/icons/ViewList';
+import MusicVideoIcon from '@material-ui/icons/MusicVideo';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import UnstyledLink from './UnstyledLink';
@@ -54,13 +55,17 @@ const links = [{
     to: '/manage',
     icon: <ViewListIcon />
 }, {
+    name: 'Editor',
+    to: '/editor',
+    icon: <MusicVideoIcon />
+}, {
     name: 'Settings',
     to: '/settings',
     icon: <SettingsIcon />
 }]
 
-const DrawerContent = ({ closeClicked, classes }) => (
-    <div className={classes.drawerContent}>
+export const DrawerContent = ({ closeClicked, classes }) => (
+    <div style={{ display: 'flex', flexDirection: 'column' }} >
         <List>
             {links.map(l => (
                 <UnstyledLink to={l.to} key={l.name}>

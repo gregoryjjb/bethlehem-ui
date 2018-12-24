@@ -13,12 +13,12 @@ const styles = theme => ({
     },
 })
 
-const PageContents = ({ classes, title, narrow = false, children }) => (
+const PageContents = ({ classes, title, narrow = false, children, ...props }) => (
     <div style={{
         margin: '0 auto',
         maxWidth: narrow ? 800 : 1000,
     }} >
-        <div className={classes.root} >
+        <div className={classes.root} {...props} >
             {title && <Typography variant='h2' gutterBottom>{title}</Typography>}
             {children}
         </div>
