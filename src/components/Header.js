@@ -13,6 +13,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import PlaybackControlsContainer from '../containers/PlaybackControlsContainer';
 import UnstyledLink from './UnstyledLink';
+import StatusDisplay from './StatusDisplay';
 
 const styles = theme => ({
     '@keyframes marquee': {
@@ -75,12 +76,7 @@ const Header = ({ classes, status, editor = false }) => (
                 </div>
                 <PlaybackControlsContainer className={classes.controls} />
                 <div className={classes.playing} >
-                    <Typography
-                        variant="h6"
-                        color="inherit"
-                        className={classes.slide} >
-                        {status}
-                    </Typography>
+                    <StatusDisplay />
                 </div>
             </Toolbar>
         )}

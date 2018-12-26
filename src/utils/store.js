@@ -26,6 +26,10 @@ const initialState = {
     'editShowDialog.open': false,
     'editShowDialog.fetching': false,
     
+    // Show create dialog
+    'createShowDialog.open': false,
+    'createShowDialog.fetching': false,
+    
     'editor.playing': false,
     'editor.show': null,
 }

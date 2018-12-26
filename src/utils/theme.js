@@ -1,22 +1,20 @@
 import { createMuiTheme } from '@material-ui/core';
 
-const theme = {
+const getTheme = editor => ({
     typography: {
         useNextVariants: true,
     },
     palette: {
+        type: editor ? 'dark' : 'light',
         primary: {
-            main: '#6a1b9a',
+            main: editor ? '#ab47bc' : '#6a1b9a',
         },
         secondary: {
             main: '#81c784',
         }
     }
-}
+})
 
-export default createMuiTheme(theme);
+export default createMuiTheme(getTheme());
 
-const etheme = JSON.parse(JSON.stringify(theme));
-etheme.palette.type = 'dark';
-
-export const editorTheme = createMuiTheme(etheme);
+export const editorTheme = createMuiTheme(getTheme(true));

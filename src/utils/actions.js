@@ -57,3 +57,8 @@ export const openEditShowDialog = show => {
     store.set('editShowDialog.open')(true);
     
 }
+
+export const openCreateShowDialog = () => {
+    store.set('createShowDialog.fetching')(false);
+    store.set('createShowDialog.open')(true);
+}

@@ -13,6 +13,8 @@ import { DrawerContent } from '../components/SideMenu';
 import { editorTheme } from '../utils/theme';
 import EditorToolbar from '../components/editor/EditorToolbar';
 import EditorShowList from '../components/editor/EditorShowList';
+import EditorShowProperties from '../components/editor/EditorShowProperties';
+import CreateShowDialog from '../components/CreateShowDialog';
 
 const styles = theme => ({
     root: {
@@ -23,7 +25,7 @@ const styles = theme => ({
         right: 0,
         background: theme.palette.background.default,
         display: 'grid',
-        gridTemplateColumns: '[col-start] 280px [side-menu] auto [col-end]',
+        gridTemplateColumns: '[col-start] 280px [side-menu] 40% [divider] auto [col-end]',
         gridTemplateRows: '[row-start] auto [toolbar] 80px [timeline] 528px [row-end]',
     },
     sideMenuArea: {
@@ -32,14 +34,24 @@ const styles = theme => ({
         gridRowStart: 'row-start',
         gridRowEnd: 'toolbar',
     },
-    topArea: {
+    listArea: {
         gridColumnStart: 'side-menu',
-        gridColumnEnd: 'col-end',
+        gridColumnEnd: 'divider',
         gridRowStart: 'row-start',
         gridRowEnd: 'toolbar',
         // To make the thingy not go outside
         minHeight: 0,
         margin: 16,
+        marginRight: 8,
+    },
+    propertiesArea: {
+        gridColumnStart: 'divider',
+        gridColumnEnd: 'col-end',
+        gridRowStart: 'row-start',
+        gridRowEnd: 'toolbar',
+        minHeight: 0,
+        margin: 16,
+        marginLeft: 8,
     },
     toolbarArea: {
         gridColumnStart: 'col-start',
@@ -78,8 +90,11 @@ const EditorPage = ({ classes, match }) => (
                 </div>
                 <DrawerContent />
             </div>
-            <div className={classes.topArea}>
+            <div className={classes.listArea}>
                 <EditorShowList />
+            </div>
+            <div className={classes.propertiesArea}>
+                <EditorShowProperties />
             </div>
             <div className={classes.toolbarArea}>
                 <EditorToolbar />
@@ -87,6 +102,7 @@ const EditorPage = ({ classes, match }) => (
             <div className={classes.timelineArea}>
                 <TimelineContainer />
             </div>
+            <CreateShowDialog />
         </div>
 );
 
