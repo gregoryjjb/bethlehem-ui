@@ -62,3 +62,12 @@ export const openCreateShowDialog = () => {
     store.set('createShowDialog.fetching')(false);
     store.set('createShowDialog.open')(true);
 }
+
+export const showNotification = (message, variant = 'default') => {
+    const n = { message, variant };
+    const list = JSON.parse(JSON.stringify(store.get('ui.notifications')));
+    list.push(n);
+    store.set('ui.notifications')(list);
+}
+
+window.showNotification = showNotification;

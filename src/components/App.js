@@ -12,6 +12,7 @@ import SettingsPage from '../pages/SettingsPage';
 import LoadingPage from '../pages/LoadingPage';
 import ManagePage from '../pages/ManagePage';
 import NotFoundPage from '../pages/NotFoundPage';
+import SnackbarContainer from '../containers/SnackbarContainer';
 
 const EditorPage = lazy(() => import('../pages/EditorPage'));
 
@@ -20,6 +21,7 @@ const App = ({ store }) => (
             <Suspense fallback={<LoadingPage />} >
                 <CssBaseline />
                 <LoadingHandler />
+                <SnackbarContainer />
                 {store.get('ready') ? (
                     <Switch>
                         <Route path='/editor/:project?' component={EditorPage} />

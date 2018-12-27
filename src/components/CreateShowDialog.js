@@ -188,6 +188,7 @@ class CreateShowDialog extends React.Component {
                                     <Button
                                         className={classes.nextButton}
                                         color='primary'
+                                        variant='outlined'
                                         disabled={fetching}
                                         onClick={this.handleNameSubmit}>
                                         Next
@@ -219,6 +220,7 @@ class CreateShowDialog extends React.Component {
                                     <Button
                                         className={classes.nextButton}
                                         color='primary'
+                                        variant='outlined'
                                         disabled={fetching}
                                         onClick={this.handleFileSubmit}>
                                         Next

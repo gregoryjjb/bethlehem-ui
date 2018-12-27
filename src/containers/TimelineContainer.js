@@ -2,6 +2,7 @@ import React from 'react';
 import Timeline, { timelineRenderUpdate } from '../utils/timeline';
 import WaveSurfer from '../utils/wavesurfer';
 import Store from '../utils/store';
+import { showNotification } from '../utils/actions';
 
 class TimelineContainer extends React.Component {
     
@@ -40,7 +41,7 @@ class TimelineContainer extends React.Component {
         const show = this.props.store.get('editor.show');
         
         if(show) {
-            this.loadProject(show.name);
+            this.loadProject(show);
         }
         
         //setTimeout(() => {
@@ -65,22 +66,39 @@ class TimelineContainer extends React.Component {
         
         if(show && show.name !== this.loadedProjectName) {
             console.log('Change in open show detected; RELOADING')
-            this.loadProject(show.name);
+            this.loadProject(show);
         }
     }
     
-    loadProject = name => {
-        if(!name) {
+    loadProject = show => {
+        if(!show || !show.name) {
             console.error('Empty name passed to loadProject!');
             return;
         }
+        
+        if(!show.hasAudio) {
+            showNotification('Cannot open show with no audio', 'warning');
+            this.props.store.set('editor.show')(null);
+            return;
+        }
+        
+        if(!show.hasSource) {
+            showNotification('Cannot open show with no source', 'warning');
+            this.props.store.set('editor.show')(null);
+            return;
+        }
+        
+        const { name } = show;
         
         this.loadedProjectName = name;
         
         this.wavesurfer.load(`/api/shows/${name}/audio`);
         fetch(`/api/shows/${name}/project`)
             .then(res => res.json())
-            .then(res => Timeline.loadProjectObject(res.project));
+            .then(res => {
+                console.log('RESULT OF FETCH', res);
+                Timeline.loadProjectObject(res.project);
+            });
     }
     
     handleKeypress = e => {

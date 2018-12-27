@@ -8,8 +8,10 @@ const initialState = {
     selectedShow: '',
     'player.status': '...',
     
+    // UI
     ready: false,
     error: '',
+    'ui.notifications': [],
     
     // Config
     'config.gpioPinNumbers': null,

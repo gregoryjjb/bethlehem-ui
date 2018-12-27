@@ -7,7 +7,7 @@ const getTheme = editor => ({
     palette: {
         type: editor ? 'dark' : 'light',
         primary: {
-            main: editor ? '#ab47bc' : '#6a1b9a',
+            main: editor ? '#b39ddb' : '#7e57c2',
         },
         secondary: {
             main: '#81c784',
