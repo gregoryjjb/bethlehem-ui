@@ -15,10 +15,20 @@ const styles = theme => ({
 })
 
 class SettingsCard extends React.Component {
-    
+    minutesToDate = minutes => {
+        const h = Math.floor(minutes / 60);
+        const m = Math.floor(minutes % 60);
+        const d = new Date();
+        d.setHours(h);
+        d.setMinutes(m);
+        return d;
+    }
     
     render() {
         const { classes, config, onSubmit, fetching } = this.props;
+        
+        let startDate = this.minutesToDate(config.autoStartTime);
+        let endDate = this.minutesToDate(config.autoEndTime);
         
         return (
             <Card>
@@ -58,6 +68,24 @@ class SettingsCard extends React.Component {
                             required: true,
                             defaultValue: config.interShowDelay,
                             validation: n => n >= 0 && n <= 3600 ? '' : 'Must be between 0 and an hour',
+                        }, {
+                            name: 'autoStart',
+                            label: 'Automatic Start',
+                            helperText: 'If enabled, will automatically "Play All" and stop at the specified times',
+                            type: 'checkbox',
+                            defaultValue: config.autoStart,
+                            divider: false,
+                        }, {
+                            name: 'autoStartTime',
+                            label: 'Start Time',
+                            type: 'time',
+                            defaultValue: startDate,
+                            divider: false,
+                        }, {
+                            name: 'autoEndTime',
+                            label: 'End Time',
+                            type: 'time',
+                            defaultValue: endDate,
                         }]}
                             xs={12}
                             sm={12}

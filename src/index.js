@@ -8,13 +8,14 @@ import theme from './utils/theme';
 import { MuiThemeProvider } from '@material-ui/core';
 import Store from './utils/store';
 
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import DateFnsUtils from '@date-io/date-fns';
+
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
-        
-            
-                <App />
-            
-        
+        <MuiPickersUtilsProvider utils={DateFnsUtils} >
+            <App />
+        </MuiPickersUtilsProvider>
     </MuiThemeProvider>,
     document.getElementById('root')
 );

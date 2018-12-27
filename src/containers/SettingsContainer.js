@@ -18,8 +18,14 @@ class SettingsContainer extends React.Component {
         super(props);
     }
     
+    dateToMinutes = d => {
+        return (d.getHours()) * 60 + d.getMinutes();
+    }
+    
     handleSubmit = results => {
         this.props.store.set('config.fetching')(true);
+        
+        console.log('THE RESULTS ARE IN', results);
         
         // Clean results
         const config = {
@@ -30,6 +36,8 @@ class SettingsContainer extends React.Component {
                 .filter(s => s !== '')
                 .map(s => Number(s)),
             interShowDelay: Number(results.interShowDelay),
+            autoStartTime: this.dateToMinutes(results.autoStartTime),
+            autoEndTime: this.dateToMinutes(results.autoEndTime),
         }
         
         api.setConfig(config)
@@ -46,6 +54,9 @@ class SettingsContainer extends React.Component {
             useBoardPinNumbering: store.get('config.useBoardPinNumbering'),
             invertPinOutput: store.get('config.invertPinOutput'),
             interShowDelay: store.get('config.interShowDelay'),
+            autoStart: store.get('config.autoStart'),
+            autoStartTime: store.get('config.autoStartTime'),
+            autoEndTime: store.get('config.autoEndTime'),
         }
         
         return (

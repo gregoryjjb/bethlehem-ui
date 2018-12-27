@@ -180,7 +180,7 @@ class Form extends React.Component {
                                 onBlur={this.handleFieldBlur}
                                 key={field.name}
                             />
-                            {divider && key !== fields.length - 1 && <Divider />}
+                            {divider && field.divider !== false && key !== fields.length - 1 && <Divider />}
                         </>
                         /*</Grid>*/
                     ))}

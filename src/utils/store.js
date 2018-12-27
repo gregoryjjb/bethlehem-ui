@@ -19,6 +19,9 @@ const initialState = {
     'config.useBoardPinNumbering': false,
     'config.gpioLogging': true,
     'config.interShowDelay': 0,
+    'config.autoStart': false,
+    'config.autoStartTime': 0,
+    'config.autoEndTime': 0,
     // Not real config options
     'config.fetching': false,
     'config.error': '',

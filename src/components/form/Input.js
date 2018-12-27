@@ -10,6 +10,9 @@ import {
 import OutlinedSelect from "./Select";
 import FileInput from "./FileInput";
 
+// import { TimeFormatInput } from 'material-ui-next-pickers';
+import { TimePicker } from 'material-ui-pickers';
+
 const styles = theme => ({
     root: {
         width: "100%",
@@ -76,6 +79,25 @@ const Input = ({ classes, field, value, valid, onChange, onBlur, requiredAsteris
                 error={valid}
                 className={classes.root}
                 onChange={onChange} />
+        )
+    }
+    
+    else if(field.type === 'time') {
+        input = (
+            //<TimeFormatInput
+            //    name={field.name}
+            //    label={field.label}
+            //    value={value}
+            //    className={classes.root}
+            //    style={{ height: 100 }}
+            //    onChange={v => onChange({ target: { value: v, name: field.name } })} />
+            <TimePicker
+                name={field.name}
+                label={field.label}
+                value={value}
+                onChange={v => { console.log("DATE CHANGED", v); onChange({ target: { value: v, name: field.name } })}}
+                variant='outlined'
+                />
         )
     }
     

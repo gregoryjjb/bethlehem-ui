@@ -32,7 +32,10 @@ export const fetchConfig = () => {
                     'useBoardPinNumbering',
                     'invertPinOutput',
                     'gpioLogging',
-                    'interShowDelay'
+                    'interShowDelay',
+                    'autoStart',
+                    'autoStartTime',
+                    'autoEndTime',
                 ].forEach(key => {
                     store.set(`config.${key}`)(res.data[key]);
                 });
