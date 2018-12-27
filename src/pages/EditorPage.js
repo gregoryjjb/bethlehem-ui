@@ -15,6 +15,8 @@ import EditorToolbar from '../components/editor/EditorToolbar';
 import EditorShowList from '../components/editor/EditorShowList';
 import EditorShowProperties from '../components/editor/EditorShowProperties';
 import CreateShowDialog from '../components/CreateShowDialog';
+import EditShowDialog from '../components/EditShowDialog';
+import EditShowDialogContainer from '../containers/EditShowDialogContainer';
 
 const styles = theme => ({
     root: {
@@ -103,6 +105,7 @@ const EditorPage = ({ classes, match }) => (
                 <TimelineContainer />
             </div>
             <CreateShowDialog />
+            <EditShowDialogContainer />
         </div>
 );
 

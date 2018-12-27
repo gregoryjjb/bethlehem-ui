@@ -20,17 +20,28 @@ class EditShowDialogContainer extends React.Component {
             ...results,
         };
         
-        api.editShow(newShow)
-            .then(res => {
-                fetchShows();
-                this.handleClose();
-            })
-            .catch(err => {
-                console.error(err);
-            })
-            .finally(() => {
-                store.set('editShowDialog.fetching')(false);
-            })
+        const audioFile = newShow.audioFile;
+        delete newShow.audioFile;
+        
+        let p = audioFile ? (
+            Promise.all([
+                api.createShowAudio(newShow.name, audioFile),
+                api.editShow(newShow),
+            ])    
+        ) : (
+            api.editShow(newShow)
+        );
+        
+        p.then(() => {
+            fetchShows();
+            this.handleClose();
+        })
+        .catch(err => {
+            console.error(err);
+        })
+        .finally(() => {
+            store.set('editShowDialog.fetching')(false);
+        })
     }
     
     render() { 

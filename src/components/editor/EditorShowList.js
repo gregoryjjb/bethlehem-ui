@@ -6,8 +6,9 @@ import {
 
 import AddIcon from '@material-ui/icons/Add';
 import Store from '../../utils/store';
-import { openCreateShowDialog } from '../../utils/actions';
+import { openCreateShowDialog, openEditShowDialog, fetchShows } from '../../utils/actions';
 import SelectableList from '../form/SelectableList';
+import api from '../../utils/api';
 
 const styles = theme => ({
     root: {
@@ -16,6 +17,7 @@ const styles = theme => ({
         maxHeight: '100%',
     },
     header: {
+        flexShrink: 0,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -27,6 +29,9 @@ const styles = theme => ({
     button: {
         marginLeft: 16,
         height: 40,
+    },
+    red: {
+        background: theme.palette.error.light,
     },
     listArea: {
         flex: 1,
@@ -43,20 +48,38 @@ class EditorShowList extends React.Component {
         }
     }
     
+    findSelectedShow = () => {
+        const shows = this.props.store.get('shows');
+        return shows.find(s => s.name === this.state.selectedShow) || null;
+    }
+    
     handleItemClick = i => {
         this.setState({ selectedShow: i });
     }
     
     handleOpenClick = e => {
-        const shows = this.props.store.get('shows');
-        
-        const show = shows.find(s => s.name === this.state.selectedShow);
-        
+        const show = this.findSelectedShow();
         this.props.store.set('editor.show')(show);
+    }
+    
+    handleEditClick = e => {
+        const show = this.findSelectedShow();
+        openEditShowDialog(show);
     }
     
     handleNewClick = e => {
         openCreateShowDialog();
+    }
+    
+    handleDeleteClick = e => {
+        const n = this.state.selectedShow;
+        if(n) {
+            this.setState({ selectedShow: '' });
+            api.deleteShow(n)
+                .then(() => {
+                    fetchShows()
+                })
+        }
     }
     
     render() {
@@ -75,6 +98,21 @@ class EditorShowList extends React.Component {
                         disabled={this.state.selectedShow === ''}
                         onClick={this.handleOpenClick} >
                         Open
+                    </Button>
+                    <Button
+                        variant='contained'
+                        color='primary'
+                        className={classes.button}
+                        disabled={this.state.selectedShow === ''}
+                        onClick={this.handleEditClick} >
+                        Edit
+                    </Button>
+                    <Button
+                        variant='contained'
+                        className={classes.button + ' ' + classes.red}
+                        disabled={this.state.selectedShow === ''}
+                        onClick={this.handleDeleteClick} >
+                        Delete
                     </Button>
                     <Button
                         variant='contained'

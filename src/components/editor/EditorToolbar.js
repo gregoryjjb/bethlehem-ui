@@ -7,6 +7,7 @@ import {
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import StopIcon from '@material-ui/icons/Stop';
+import SaveIcon from '@material-ui/icons/Save';
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import FlipToFrontIcon from '@material-ui/icons/FlipToFront';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
@@ -14,6 +15,8 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import OutlinedSelect from '../form/Select';
 import Timeline from '../../utils/timeline';
 import Store from '../../utils/store';
+import api from '../../utils/api';
+import { showNotification } from '../../utils/actions';
 
 const styles = theme => ({
     root: {
@@ -40,7 +43,7 @@ const styles = theme => ({
     },
     title: {
         flex: 1,
-        marginLeft: 16,
+        marginLeft: 8,
     }
 });
 
@@ -75,6 +78,15 @@ class EditorToolbar extends React.Component {
         Timeline.wavesurfer.stop();
         Timeline.time = 0;
         this.props.store.set('editor.playing')(false);
+    }
+    
+    handleSave = e => {
+        const project = Timeline.getProjectObject();
+        const name = this.props.store.get('editor.show').name;
+        api.saveShowProject(name, project)
+            .then(res => {
+                showNotification('Saved', 'success');
+            });
     }
     
     makeButton = (label, Icon, onClick) => (
@@ -127,6 +139,12 @@ class EditorToolbar extends React.Component {
                             { value: 'quarter', label: '0.25x' },
                         ]}
                         className={classes.select} />
+                    <IconButton
+                        disabled={this.disabled}
+                        className={classes.button}
+                        onClick={this.handleSave}>
+                        <SaveIcon />
+                    </IconButton>
                     <Typography variant='h5' className={classes.title} >
                         {show ? show.displayName : 'Please open a show'}
                     </Typography>

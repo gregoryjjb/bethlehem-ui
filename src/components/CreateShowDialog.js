@@ -13,17 +13,11 @@ import {
     Button,
     TextField,
     Typography,
-    FormControl,
-    FormControlLabel,
 } from '@material-ui/core';
 
 import api from '../utils/api';
-
-const steps = [
-    'Name',
-    'Music File',
-    ''
-]
+import FileInput from './form/FileInput';
+import { fetchShows } from '../utils/actions';
 
 const styles = {
     stepArea: {
@@ -95,6 +89,7 @@ class CreateShowDialog extends React.Component {
                 })
                 .then(() => {
                     this.setState({ fetching: false });
+                    fetchShows();
                 });
         }
         else {
@@ -149,6 +144,7 @@ class CreateShowDialog extends React.Component {
             })
             .then(() => {
                 this.setState({ fetching: false });
+                fetchShows();
             })
     }
     
@@ -159,6 +155,7 @@ class CreateShowDialog extends React.Component {
             fetching,
             name,
             nameError,
+            audioFile,
             audioFileName,
             createdShow,
         } = this.state;
@@ -200,23 +197,11 @@ class CreateShowDialog extends React.Component {
                             <StepLabel>Music File</StepLabel>
                             <StepContent>
                                 <div className={classes.stepArea}>
-                                    <div className={classes.fileInputArea}>
-                                        <input
-                                            className={classes.fileInput}
-                                            id='audio-file-input'
-                                            type='file'
-                                            accept='.mp3'
-                                            onChange={this.handleFileChange}>
-                                        </input>
-                                        <label htmlFor='audio-file-input'>
-                                            <Button
-                                                variant='outlined'
-                                                component='span'>
-                                                Select
-                                            </Button>
-                                        </label>
-                                        <Typography variant='body2' className={classes.fileName}>{audioFileName}</Typography>
-                                    </div>
+                                    <FileInput
+                                        label='Audio file'
+                                        accept='.mp3'
+                                        value={audioFile}
+                                        onChange={this.handleFileChange} />
                                     <Button
                                         className={classes.nextButton}
                                         color='primary'
@@ -236,7 +221,9 @@ class CreateShowDialog extends React.Component {
                                 className={classes.nextButton}
                                 color='primary'
                                 onClick={() => {
-                                    store.set('editor.show')(createdShow);
+                                    const shows = store.get('shows');
+                                    const s = shows.find(s => s.name === createdShow.name) || null;
+                                    store.set('editor.show')(s);
                                     this.handleClose();
                                 }}>
                                 Open in editor

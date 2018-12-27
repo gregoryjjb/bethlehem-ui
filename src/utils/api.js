@@ -24,4 +24,8 @@ api.createShowAudio = (name, audioFile) => {
 
 api.editShow = show => axApi.put(`shows/${show.name}`, show);
 
+api.saveShowProject = (name, project) => axApi.post(`shows/${name}/project`, { project });
+
+api.deleteShow = name => axApi.delete(`shows/${name}`);
+
 export default api;

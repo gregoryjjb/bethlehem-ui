@@ -26,6 +26,12 @@ const EditShowDialog = ({ classes, open, show, fetching, onCancel, onSubmit }) =
                         label: 'Include in "Play All" rotation',
                         type: 'checkbox',
                         defaultValue: show.playInAll,
+                    }, {
+                        name: 'audioFile',
+                        label: 'Audio File',
+                        type: 'file',
+                        accept: '.mp3',
+                        required: false,
                     }]}
                     fetching={fetching}
                     onSubmit={onSubmit}

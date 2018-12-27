@@ -6,6 +6,7 @@ import {
 
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+import FileInput from './form/FileInput';
 
 const styles = theme => ({
     root: {

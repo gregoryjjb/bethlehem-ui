@@ -100,8 +100,14 @@ class Form extends React.Component {
     handleFieldChange = e => {
         const target = e.target;
         const name = target.name;
-        const value =
-            target.type === "checkbox" ? target.checked : target.value;
+        let value = target.value;
+        
+        if(target.type === 'file') {
+            value = target.files[0];
+        }
+        else if(target.type === 'checkbox') {
+            value = target.checked;
+        }
 
         console.log({ name, value });
 

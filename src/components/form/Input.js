@@ -8,6 +8,7 @@ import {
     Checkbox,
 } from "@material-ui/core";
 import OutlinedSelect from "./Select";
+import FileInput from "./FileInput";
 
 const styles = theme => ({
     root: {
@@ -63,7 +64,20 @@ const Input = ({ classes, field, value, valid, onChange, onBlur, requiredAsteris
 				}
 			/>
 		)
-	}
+    }
+    
+    else if(field.type === 'file') {
+        input = (
+            <FileInput
+                name={field.name}
+                label={field.label}
+                value={value}
+                accept={field.accept || '*'}
+                error={valid}
+                className={classes.root}
+                onChange={onChange} />
+        )
+    }
     
     else {
         input = (
