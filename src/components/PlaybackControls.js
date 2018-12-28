@@ -3,6 +3,7 @@ import React from 'react';
 import {
     withStyles,
     Button,
+    Switch,
 } from '@material-ui/core';
 
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
@@ -32,11 +33,14 @@ const styles = theme => ({
     },
 })
 
-const PlaybackControls = ({ classes, className, onPlayClicked, onStopClicked, onSkipClicked }) => (
+const PlaybackControls = ({ classes, className, isOn, onPowerClicked, onPlayClicked, onStopClicked, onSkipClicked }) => (
     <div className={classes.root + ' ' + className} >
-        <Button className={classes.circle} variant="contained" color="secondary" >
+        {/*<Button className={classes.circle} variant="contained" color="secondary" >
             <FastRewindIcon />
-        </Button>
+        </Button>*/}
+        <Switch
+            checked={isOn}
+            onChange={onPowerClicked} />
         <Button
             className={classes.rounded}
             size="large"

@@ -69,7 +69,7 @@ export const DrawerContent = ({ closeClicked, classes }) => (
         <List>
             {links.map(l => (
                 <UnstyledLink to={l.to} key={l.name}>
-                    <ListItem button>
+                    <ListItem button onClick={closeClicked} >
                         <ListItemIcon>
                             {l.icon}
                         </ListItemIcon>
