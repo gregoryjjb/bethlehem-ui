@@ -1,8 +1,10 @@
 import React from 'react';
 
 import PlaybackControls from '../components/PlaybackControls';
-
 import Store from '../utils/store';
+import { showNotification } from '../utils/actions';
+
+const DEMO = process.env.REACT_APP_DEMO_MODE === 'true';
 
 class PlaybackControlsContainer extends React.Component {
     
@@ -17,18 +19,24 @@ class PlaybackControlsContainer extends React.Component {
             fetch('api/play/lightsoff');
         }
     }
+
+    demoCheck = msg => {
+        if(DEMO) showNotification(msg || 'Demo mode; cannot play', 'warning');
+    }
     
     playAll = () => {
-        console.log("What")
         fetch('api/play/all');
+        this.demoCheck();
     }
     
     stop = () => {
         fetch('api/play/stop');
+        this.demoCheck();
     }
     
     skip = () => {
         fetch('api/play/skip');
+        this.demoCheck();
     }
     
     render() {

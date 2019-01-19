@@ -2,6 +2,7 @@ import React from 'react';
 import Timeline, { timelineRenderUpdate } from '../utils/timeline';
 import WaveSurfer from '../utils/wavesurfer';
 import Store from '../utils/store';
+import api from '../utils/api';
 import { showNotification } from '../utils/actions';
 
 class TimelineContainer extends React.Component {
@@ -92,12 +93,14 @@ class TimelineContainer extends React.Component {
         
         this.loadedProjectName = name;
         
-        this.wavesurfer.load(`/api/shows/${name}/audio`);
-        fetch(`/api/shows/${name}/project`)
-            .then(res => res.json())
+        //this.wavesurfer.load(`/api/shows/${name}/audio`);
+        //fetch(`/api/shows/${name}/project`)
+        this.wavesurfer.load(api.audioPath(name));
+        api.getShowProject(name)
+            //.then(res => res.json())
             .then(res => {
-                console.log('RESULT OF FETCH', res);
-                Timeline.loadProjectObject(res.project);
+                console.log('RESULT OF FETCH', res.data);
+                Timeline.loadProjectObject(res.data.project);
             });
     }
     

@@ -10,6 +10,10 @@ import { openCreateShowDialog, openEditShowDialog, fetchShows } from '../../util
 import SelectableList from '../form/SelectableList';
 import api from '../../utils/api';
 
+const DEMO = process.env.REACT_APP_DEMO_MODE === 'true';
+
+console.log("AND THE MODE IS", DEMO);
+
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -103,14 +107,14 @@ class EditorShowList extends React.Component {
                         variant='contained'
                         color='primary'
                         className={classes.button}
-                        disabled={this.state.selectedShow === ''}
+                        disabled={this.state.selectedShow === '' || DEMO}
                         onClick={this.handleEditClick} >
                         Edit
                     </Button>
                     <Button
                         variant='contained'
                         className={classes.button + ' ' + classes.red}
-                        disabled={this.state.selectedShow === ''}
+                        disabled={this.state.selectedShow === '' || DEMO}
                         onClick={this.handleDeleteClick} >
                         Delete
                     </Button>
@@ -118,6 +122,7 @@ class EditorShowList extends React.Component {
                         variant='contained'
                         color='secondary'
                         className={classes.button}
+                        disabled={DEMO}
                         onClick={this.handleNewClick} >
                         <AddIcon />
                         Create
